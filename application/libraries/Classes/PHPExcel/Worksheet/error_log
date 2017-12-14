@@ -1,0 +1,4 @@
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Worksheet_Drawing' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Worksheet/HeaderFooterDrawing.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Interface 'PHPExcel_IComparable' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Worksheet/BaseDrawing.php on line 37
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Worksheet_BaseDrawing' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Worksheet/MemoryDrawing.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Worksheet_BaseDrawing' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Worksheet/Drawing.php on line 36

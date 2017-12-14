@@ -1,0 +1,2 @@
+[31-Mar-2015 15:34:33 UTC] PHP Fatal error:  Class 'PHPExcel_Writer_Excel5_BIFFwriter' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Writer/Excel5/Worksheet.php on line 72
+[31-Mar-2015 15:34:33 UTC] PHP Fatal error:  Class 'PHPExcel_Writer_Excel5_BIFFwriter' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Writer/Excel5/Workbook.php on line 72

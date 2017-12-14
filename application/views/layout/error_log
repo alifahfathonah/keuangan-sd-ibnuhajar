@@ -1,0 +1,4 @@
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function site_url() in /home/k6191362/public_html/keuangan/application/views/layout/navbar.php on line 10
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function site_url() in /home/k6191362/public_html/keuangan/application/views/layout/leftmenu.php on line 7
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Using $this when not in object context in /home/k6191362/public_html/keuangan/application/views/layout/home.php on line 21
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k6191362/public_html/keuangan/application/views/layout/header.php on line 21

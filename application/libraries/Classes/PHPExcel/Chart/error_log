@@ -1,0 +1,1 @@
+[31-Mar-2015 15:34:34 UTC] PHP Fatal error:  Class 'PHPExcel_Exception' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Chart/Exception.php on line 36
