@@ -1,0 +1,2 @@
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Interface 'PHPExcel_RichText_ITextElement' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/RichText/TextElement.php on line 35
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_RichText_TextElement' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/RichText/Run.php on line 34

@@ -1,5 +1,6 @@
 <?php
 date_default_timezone_set('Asia/Jakarta');
+ini_set("allow_url_fopen", 1);
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

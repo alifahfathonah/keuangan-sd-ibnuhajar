@@ -126,4 +126,28 @@ class Login extends CI_Controller {
 		echo (is_callable('curl_init')) ? '<h1>Enabled</h1>' : '<h1>Not enabled</h1>' ;
 	}
 	
+	function edit_pembayaran()
+	{
+		$file=file_get_contents('media/files/edit-pembayaran.txt');
+		$f=explode("\n",$file);
+		{
+			// echo count($f);
+			$x=0;
+			foreach($f as $k=>$v){
+				list($id,$idkelas2,$idkelas)=explode(';',$v);
+				$data['t_siswa_has_t_kelas_id']=$idkelas2;
+				// $data[$x]['id']=$id;
+				$x++;
+
+				// $this->db->set();
+				$this->db->where('id',$id);
+				$this->db->update('t_pembayaran',$data);
+			}
+			// $this->db->update_batch('t_pembayaran',$data, 'id'); 
+
+			echo '<pre>';
+			print_r($data);
+			echo '</pre>';
+		}
+	}
 }

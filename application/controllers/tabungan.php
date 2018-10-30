@@ -489,6 +489,7 @@ class Tabungan extends A {
 		// echo '<pre>';
 		// print_r($gr->result());
 		// echo '</pre>';
+		$totalterima=$totaltarik=0;
 		if($gr->num_rows!=0)
 		{
 			foreach ($gr->result() as $k => $v) 
@@ -501,27 +502,31 @@ class Tabungan extends A {
 				else if($jn==3)
 					$jns='Infaq';
 				else if($jn==4)
-					$jns='Penarikan';
+					$jns='Penarikan Harian';
+				else if($jn==5)
+					$jns='Penarikan Tak Lain';
+				else if($jn==6)
+					$jns='Penarikan Infaq';
 				// echo $v->nokwitansi.'--<br>';
 
 				$dt[$jns][]=$v->jumlah;
 				// $total+=$v->total;
 			}
 
-			$total=0;
+			
 			foreach ($dt as $k => $v) 
 			{
 				$jlh=array_sum($dt[$k]);
 				//$jenis[$k]=$jlh;				
 				// echo $k.'-'.$jlh.'<br>';
-				if($k!='Penarikan')
+				if(strpos($k,'Penarikan')===false)
 				{
-					$total+=$jlh;
+					$totalterima+=$jlh;
 					$color = '#00FF00';
 				}
 				else
 				{
-					$total-=$jlh;
+					$totaltarik+=$jlh;
 					$color = '#FF00FF';
 				}
 				
@@ -544,7 +549,14 @@ class Tabungan extends A {
 		{
 			$data['judul']='Jumlah Tabungan Harian : '.tgl_indo2($tggl);
 		}
-		$data['g']=$g.'["Total",'.$total.']';
+
+		if($totalterima==0)
+			$total=$totaltarik;
+		elseif($totaltarik==0)
+			$total=$totalterima;
+		else
+			$total=$totalterima-$totaltarik;
+		$data['g']=$g.'["Total",'.($total).']';
 		$data['jenis']=$jenis;
 		$this->load->view('tabungan/grafik',$data);	
 	}
@@ -635,13 +647,21 @@ class Tabungan extends A {
 			$this->db->where($wh);
 			$this->db->update('t_tabungan');
 
+			if($_POST['jenistabungan']==1)
+				$nokwitansi='4'.'-'.date('Ymd').'-'.substr(generate_id(), 0,4);
+			elseif($_POST['jenistabungan']==2)
+				$nokwitansi='5'.'-'.date('Ymd').'-'.substr(generate_id(), 0,4);
+			elseif($_POST['jenistabungan']==3)
+				$nokwitansi='6'.'-'.date('Ymd').'-'.substr(generate_id(), 0,4);
+
+
 			$d['id_d']=generate_id();
 			$d['id_tab']=$idtabungan;
 			$d['tarik_setor']='tarik';
 			$d['jumlah']=$jumlah;
 			$d['keterangan']=$keterangan;
 			$d['penarik']=$penarik;
-			$d['nokwitansi']='4'.'-'.date('Ymd').'-'.substr(generate_id(), 0,4);
+			$d['nokwitansi']=$nokwitansi;
 			$d['tgl_transaksi']=$tgl.' '.date('H:i:s');
 			$d['petugas']=$this->session->userdata('nama');
 			$this->db->insert('t_tabungan_detail',$d);

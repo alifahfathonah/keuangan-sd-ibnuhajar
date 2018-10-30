@@ -1,0 +1,92 @@
+select id,nis,nama,tahunajaran from v_kelas_aktif where 
+(tahunajaran='2017-2018 or tahunajaran='2018-2019') and
+(nama like '%Adilla Putri%' or
+nama like '%Adriansyah Ramadhan%' or
+nama like '%Aisyah Adila%' or
+nama like '%Aisyah Putri Zahirah%' or
+nama like '%Amalia Salsabil%' or
+nama like '%Andaru Azha%' or
+nama like '%Andhika Zaky Firdau%' or
+nama like '%Aqeela Fakhira Arraza%' or
+nama like '%Aqila Nashwa Rashiqa%' or
+nama like '%Areej Rambu Dilar%' or
+nama like '%Arifin Rahma%' or
+nama like '%Muhammad Arkan Labi%' or
+nama like '%Asyraf Dzaki Mubaro%' or
+nama like '%Attaya Shakila Agun%' or
+nama like '%Azkiya Rambu Bilawa%' or
+nama like '%Bima Setiaji Darmawa%' or
+nama like '%Clarisa Rafeylah Saahira%' or
+nama like '%Daanish Radiandra%' or
+nama like '%Daffa Bravia Maheswar%' or
+nama like '%Eshan Banin Khaizura%' or
+nama like '%Fawwaz Abdan Hajj Arifi%' or
+nama like '%Fina Azka Karima%' or
+nama like '%Hasna Haniya Ima%' or
+nama like '%Haura Alghumaisha%' or
+nama like '%Haura Habibah Thufaila%' or
+nama like '%Huriyya Insiyya%' or
+nama like '%Jeihan Akbar Maulan%' or
+nama like '%Kasyfa Daanish Tresnadwik%' or
+nama like '%Keanu Dzakwan Henriek%' or
+nama like '%Kenzie Mahardyek%' or
+nama like '%Kenzie Ramadhan Sirega%' or
+nama like '%Keyla Syafa Aulia%' or
+nama like '%Khaira Faizia Rahma%' or
+nama like '%Khaira Kalifa Kinant%' or
+nama like '%Khansa Hamidah Ayre%' or
+nama like '%Khansa Hannan Aziza%' or
+nama like '%Khanza Fathira Rukwit%' or
+nama like '%Lutfi Hakim Athari%' or
+nama like '%Meisya Alya Sopan%' or
+nama like '%Mohammad Rhasya Andrian%' or
+nama like '%Muhamad Nadhif Maulana%' or
+nama like '%Muhammad  Naufal Zuhayr%' or
+nama like '%Muhammad Ammar Hai%' or
+nama like '%Muhammad Arasy Raihan Danis%' or
+nama like '%Muhammad Eshan Asfa%' or
+nama like '%Muhammad Fadli Habib%' or
+nama like '%Muhammad Faiq Alfaris%' or
+nama like '%Muhammad Faiz Rizki Thaur%' or
+nama like '%Muhammad Faqi%' or
+nama like '%Muhammad Farrel Alvid%' or
+nama like '%Muhammad Fathan Arrayyan Thaur%' or
+nama like '%Muhammad Fathir Raischa Al-Munawa%' or
+nama like '%Muhammad Ghaisan Aman%' or
+nama like '%Muhammad Rizky Indra Perman%' or
+nama like '%Muhammad Syiham Falah%' or
+nama like '%Muhammad Wayan Viddy Abipray%' or
+nama like '%Muhammad Zaid Aulia Syari%' or
+nama like '%Muhammad Zaky Rahmani Nasutio%' or
+nama like '%Muhammad Zhafran Athi%' or
+nama like '%Mutiara Octiva Khowarism%' or
+nama like '%Nabiel Farand Juliandr%' or
+nama like '%Nayazka Nisgi Adhitam%' or
+nama like '%Nayazka Nisgi Adhitam%' or
+nama like '%Neas Mughni Mustofa%' or
+nama like '%Nesa Syafira Mustof%' or
+nama like '%Raden Kalyla Arlisandri%' or
+nama like '%Rafa Khalfani Sakh%' or
+nama like '%Raidan Nizamul Haki%' or
+nama like '%Raihanah Farra%' or
+nama like '%Rania Nur Hasnaa Putr%' or
+nama like '%Rasendriya Rizza Shaquille Setiawa%' or
+nama like '%Rashya Ardani Al Farezi%' or
+nama like '%Rayhan Aidil Ardhiansyah Pohan Simanjunta%' or
+nama like '%Reithania Allikha Putr%' or
+nama like '%Reizel Aria Desth%' or
+nama like '%Riham Hisya%' or
+nama like '%Rizky Athallah Bachr%' or
+nama like '%Safa Melodi Zahira%' or
+nama like '%Safa Nafaisya Athalla%' or
+nama like '%Sarah Alifa Putr%' or
+nama like '%Shidqy Malik Kaul%' or
+nama like '%Siti Auriga Atri Ankanz%' or
+nama like '%Vishabil Naftaline Febiansyah%' or
+nama like '%Wafdan Sulaiman Aj%' or
+nama like '%Westra Bornie Kailan%' or
+nama like '%Zahirah Deges Raeli Sirega%' or
+nama like '%Zaniel Al faqeeh%') order by nama,tahunajaran desc;
+
+(17530069,30841764,32850593,22879431,17566755,39043404,30028437,37070148,30599743,38819258,82979551,28792537,15842849,26777383,73965027,33881607,15403111,12059064,35973342,13284901,30582308,19126474,27807494,69836911,20467965,13721653,12492792,38784933,84066171,27260463,16327231,17940293,32607881,14779641,97928058,18863463,27644491,37976887,25485563,15370083,34329945,33289693,15722844,15915825,68862527,38001293,26709131,40853522,29997955,32613362,22548078,21927912,35533972,13512109,11011603,14479179,72245447,29378411,15387907,42203689,12844929,41918144,26488169,15933065,40961513,28155193,67542759,11732446,38529801,31598448,39055811,14365793,32213206,35777640,21207641,27165794,41238361,27778487,35644303,63098711,21970881,85743798,10617331,33172847,25924148);
+

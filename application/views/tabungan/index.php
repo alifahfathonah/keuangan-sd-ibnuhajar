@@ -262,13 +262,15 @@ echo '<option value="'.$v->id_pembagian.'__'.str_replace(' ', '%20', $v->id_sisw
 		var penarik=$('#penarik').val();
 		var keterangan=$('#keterangan').val();
 		var jumlah=$('#jumlah').val();
+		var petugas_tarik=$('#petugas_tarik').val();
+		var jenistabungantarik=$('#jenistabungantarik').val();
 		jumlah = jumlah.replace(/,/g,'');
-		var nama_siswa=$('#nama_siswa').val();
+		var nama_siswa=$('#nama_siswa_tarik').val();
 		var xmlhttp = new XMLHttpRequest();
 			var originalContents = document.body.innerHTML;
 			xmlhttp.open('POST', "<?=site_url()?>topdf/penarikantabungan/"+nama_siswa+'/'+jumlah+'/'+tgl, false);
 			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			xmlhttp.send('keterangan='+keterangan+'&penarik='+penarik);
+			xmlhttp.send('keterangan='+keterangan+'&penarik='+penarik+'&petugas='+petugas_tarik+'&jenistarik='+jenistabungantarik);
 			if(xmlhttp.status == 200) {
 				document.body.innerHTML = xmlhttp.responseText;
 				window.print();
@@ -285,20 +287,32 @@ echo '<option value="'.$v->id_pembagian.'__'.str_replace(' ', '%20', $v->id_sisw
 	$(document).ready(function(){
 		grafikbulan();
 		$('button#simpantarikan').click(function(){
-			var c=confirm("Apakah Data Penarikan ini sudah Benar ?");
-			if(c)
+			var sis=$('#nama_siswa_tarik').val();
+			var jns=$('#jenistabungantarik').val();
+			if(sis==0)
 			{
-				var tgl=$('#tglll').val();
-				$.ajax({
-					url : '<?=site_url()?>tabungan/simpanpenarikan/'+tgl,
-					type : 'POST',
-					data : $('form#simpanpenarikan').serialize(),
-					success : function(a)
-					{
-						printkwitansi();
-
-					}
-				});
+				alert('Nama Siswa Belum Dipilih');
+			}
+			else if(jns==0)
+			{
+				alert('Jenis Penarikan Tabungan Belum Dipilih');
+			}
+			else
+			{
+				var c=confirm("Apakah Data Penarikan ini sudah Benar ?");
+				if(c)
+				{
+					var tgl=$('#tglll').val();
+					$.ajax({
+						url : '<?=site_url()?>tabungan/simpanpenarikan/'+tgl,
+						type : 'POST',
+						data : $('form#simpanpenarikan').serialize(),
+						success : function(a)
+						{
+							printkwitansi();
+						}
+					});
+				}
 			}
 		});
 

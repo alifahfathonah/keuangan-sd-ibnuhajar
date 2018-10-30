@@ -1,0 +1,5 @@
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function site_url() in /home/k6191362/public_html/keuangan/application/views/kelas/aktif.php on line 55
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function site_url() in /home/k6191362/public_html/keuangan/application/views/kelas/aktifedit.php on line 24
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k6191362/public_html/keuangan/application/views/kelas/index.php on line 4
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function site_url() in /home/k6191362/public_html/keuangan/application/views/kelas/add.php on line 82
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function site_url() in /home/k6191362/public_html/keuangan/application/views/kelas/addsiswa.php on line 23

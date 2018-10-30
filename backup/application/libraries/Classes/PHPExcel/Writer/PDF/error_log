@@ -1,0 +1,4 @@
+[31-Mar-2015 15:34:33 UTC] PHP Fatal error:  Class 'PHPExcel_Settings' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Writer/PDF/tcPDF.php on line 30
+[31-Mar-2015 15:34:33 UTC] PHP Fatal error:  Class 'PHPExcel_Settings' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Writer/PDF/mPDF.php on line 30
+[31-Mar-2015 15:34:33 UTC] PHP Fatal error:  Class 'PHPExcel_Settings' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Writer/PDF/DomPDF.php on line 30
+[31-Mar-2015 15:34:33 UTC] PHP Fatal error:  Class 'PHPExcel_Writer_HTML' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Writer/PDF/Core.php on line 37

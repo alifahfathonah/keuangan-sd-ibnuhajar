@@ -62,6 +62,14 @@ class Topdf extends A {
 				<div style="width:100%;float:left;padding:5px;letter-spacing:-2px;font-family:verdana;font-weight:bold;background:#369bd7;margin:10px 0;text-align:center;color:white;font-size:30px;">BUKTI PENARIKAN TABUNGAN</div>
 			
 			';
+		if($_POST['jenistarik']==1)
+			$jenis='Tabungan Harian';
+		elseif($_POST['jenistarik']==2)
+			$jenis='Tabungan Tak Lain';
+		elseif($_POST['jenistarik']==3)
+			$jenis='Infaq';
+
+
 		echo '<div style="width:49%;;float:left;font-weight:bold;font-size:14px;">
 				
 				<div style="width:100%;float:left;">
@@ -78,6 +86,11 @@ class Topdf extends A {
 					<div style="width:39%;float:left;margin:3px 3px 3px 5px;">Jumlah Penarikan</div>	
 					<div style="width:5px;float:left;margin:3px 3px 3px 5px;">:</div>	
 					<div style="width:50%;float:right;margin:3px 3px 3px 5px;">'.number_format($jumlah).'</div>				
+				</div>
+				<div style="width:100%;float:left;">
+					<div style="width:39%;float:left;margin:3px 3px 3px 5px;">Jenis Penarikan</div>	
+					<div style="width:5px;float:left;margin:3px 3px 3px 5px;">:</div>	
+					<div style="width:50%;float:right;margin:3px 3px 3px 5px;">'.$jenis.'</div>				
 				</div>
 				<div style="width:100%;float:left;">
 					<div style="width:39%;float:left;margin:3px 3px 3px 5px;">Terbilang</div>	
@@ -109,7 +122,7 @@ class Topdf extends A {
 						<br>
 						<br>
 						<br>
-						'.$this->session->userdata('nama').'
+						'.(isset($_POST['petugas']) ? $_POST['petugas'] : (!empty($_POST['petugas']) ? $_POST['petugas'] : $this->session->userdata('nama') )).'
 					</div>
 				</div>
 			</div>';
@@ -306,7 +319,7 @@ class Topdf extends A {
 						<br>
 						<br>
 						<br>
-						<?=$this->session->userdata('nama')?>
+						<?=$_POST['penerima']?>
 					</div>
 				</div>
 			</div>
@@ -508,7 +521,7 @@ class Topdf extends A {
 						<br>
 						<br>
 						<br>
-						<?=$this->session->userdata('nama')?>
+						<?=$_POST['penerima']?>
 					</div>
 				</div>
 			</div>
@@ -711,7 +724,7 @@ class Topdf extends A {
 						<br>
 						<br>
 						<br>
-						<?=$this->session->userdata('nama')?>
+						<?=$_POST['penerima']?>
 					</div>
 				</div>
 			</div>

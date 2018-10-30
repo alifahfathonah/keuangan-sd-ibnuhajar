@@ -1,0 +1,3 @@
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k6191362/public_html/keuangan/application/views/siswa/waitinglist.php on line 4
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k6191362/public_html/keuangan/application/views/siswa/index.php on line 4
+[31-Mar-2015 15:34:36 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/k6191362/public_html/keuangan/application/views/siswa/add.php on line 204

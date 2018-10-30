@@ -92,6 +92,18 @@ function load_config()
 	   $sql="alter table t_jenis_pembayaran add column `kode_akun` char(10)";
 	   $smp_db->query($sql);
 	}	
+//---------------------------------------------------------------------------------------------------
+
+	if (!$ci->db->field_exists('VA', 't_siswa'))
+	{
+	   $sql="alter table t_siswa add column `VA` varchar(255)";
+	   $ci->db->query($sql);
+	}	
+	if (!$smp_db->field_exists('VA', 't_siswa'))
+	{
+	   $sql="alter table t_siswa add column `VA` varchar(255)";
+	   $smp_db->query($sql);
+	}	
 
 //---------------------------------------------------------------------------------------------------
 	if (!$ci->db->field_exists('jumlah_diskon', 't_penerimaan_rutin'))
@@ -383,6 +395,44 @@ function load_config()
 	   		)";
 	   	$smp_db->query($sql);	
 	}
+	if (!$smp_db->table_exists('t_transaksi'))
+	{
+	   $sql="create table t_transaksi
+	   		(
+	   			id int primary key AUTO_INCREMENT,
+	   			id_pembayaran int,
+	   			id_record_pembayaran int,
+	   			tanggal datetime,
+	   			total double default 0,
+	   			kode_transaksi varchar(255)
+	   		)";
+	   	$smp_db->query($sql);	
+	}
+	if (!$ci->db->table_exists('t_transaksi'))
+	{
+	   $sql="create table t_transaksi
+	   		(
+	   			id int primary key AUTO_INCREMENT,
+	   			id_pembayaran int,
+	   			id_record_pembayaran int,
+	   			tanggal datetime,
+	   			total double default 0,
+	   			kode_transaksi varchar(255)
+	   		)";
+	   	$ci->db->query($sql);	
+	}
+	if (!$ci->db->table_exists('t_transaksi_va'))
+	{
+	   $sql="create table t_transaksi_va
+	   		(
+	   			id int primary key AUTO_INCREMENT,
+	   			idTagihan bigint,
+	   			t_penerimaan_rutin_id varchar(255),
+	   			t_record_pembayaran_id varchar(255),
+	   			status int default 0
+	   		)";
+	   	$ci->db->query($sql);	
+	}
 
 //------------------------------------------------------------------------------------------------------
 
@@ -432,5 +482,14 @@ function load_config()
 			$smp_db->insert('t_ajaran',$d_smp);
 		}
 	}
+
+	$user=$ci->db->from('t_user')->get();
+	$us=array();
+	foreach($user->result() as $k => $v)
+	{
+		$us[$v->id]=$v;
+	}
+	$ci->config->set_item('user_id',$us);
+	$user->free_result();
 }
 ?>

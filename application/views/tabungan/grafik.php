@@ -19,11 +19,13 @@
 	            }
 	        },
 	        yAxis: {
-	            min: 0,
 	            title: {
 	                text: 'Rupiah'
 	            }
-	        },
+			},
+			credits :{
+               enabled: false
+            },
 	        legend: {
 	            enabled: false
 	        },

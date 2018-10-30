@@ -130,7 +130,7 @@ class Laporan extends A {
 		{
 			if($j->id!=3 && $j->id!=4)
 			{
-				echo '<th style="text-align:center;width:20%;font-weight:bold">'.$j->jenis.'</th>';
+				echo '<th style="text-align:center;width:15% !important;font-weight:bold">'.$j->jenis.'</th>';
 			}
 		}
 
@@ -167,8 +167,9 @@ class Laporan extends A {
 						$by=$this->pm->getpembayaranby_idkelasaktif_nis_idjenis_bulan_tahun($jj->id,$nis,$idkelas,$c,$y);
 						$byr=$by->result();
 						// echo $j->id.'-'.$nis.'-'.$idkelas.'<br>';
-						$tgl_byr='';
+						$tgl_byr='<div style="width:100%;float:left">';
 						$jlh_byr=0;
+
 						for ($j=0; $j < count($byr); $j++)
 						{
 							$tgl_byr.='<div style="width:50%;float:left;">'.tgl_indo2($byr[$j]->tgl_transaksi).'</div>';
@@ -188,9 +189,9 @@ class Laporan extends A {
 							$njen=strtolower($jj->jenis);
 							${"$njen"}[]=($nn->num_rows!=0 ? $nn->row('wajib_bayar') : 0);
 						}
-						echo '<td style="text-align:right;width:18%">';
+						echo '<td style="text-align:right;">';
 						//print_r($byr);
-						echo $tgl_byr;
+						echo $tgl_byr.'</div>';
 						echo '</td>';
 					}
 				}
@@ -207,10 +208,10 @@ class Laporan extends A {
 					if(isset(${"$njen"}))
 					{
 
-						echo '<th style="text-align:right;width:20%;font-weight:bold">'.rupiah(array_sum(${"$njen"})).'</th>';
+						echo '<th style="text-align:right;font-weight:bold">'.rupiah(array_sum(${"$njen"})).'</th>';
 					}
 					else
-						echo '<th style="text-align:right;width:20%;font-weight:bold">-</th>';
+						echo '<th style="text-align:right;font-weight:bold">-</th>';
 
 				}
 			}
@@ -307,6 +308,8 @@ class Laporan extends A {
 
 								if($sisa>0)
 									$jj.='<br><span style="color:red">'.rupiah($sisa).'-</span>';
+								else if($sisa<0)
+									$jj.='<br><span style="color:green">Kelebihan : '.rupiah($sisa).'-</span>';
 
 
 									//$js=$js;
@@ -316,6 +319,8 @@ class Laporan extends A {
 							{
 								if($sisa==0)
 									$jj='<span style="color:red">'.rupiah($sisa).'</span>';
+								else if($sisa<0)
+									$jj.='<span style="color:green">Kelebihan : '.rupiah($sisa).'-</span>';
 								else
 									$jj='<span style="color:red">'.rupiah($sisa).'</span>';
 
@@ -353,6 +358,7 @@ class Laporan extends A {
 				if($v->num_rows!=0)
 				{
 					$data[$s->nis][$idjenis]=$v->row('nama').'|'.$v->row('wajib_bayar').'|'.$v->row('sisa');
+					// $data[$s->nis][$idjenis]=$v->row('nama').'|'.$v->row('wajib_bayar').'|'.($v->row('wajib_bayar')-$v->row('sudah_bayar')-$v->row('sisa'));
 					$nis_sis[$s->nis]=$s->nis_baru;
 					$disc[$s->nis]=$v->row('jumlah_diskon');
 				}
@@ -415,6 +421,9 @@ class Laporan extends A {
 					<tbody>';
 
 			$no=1;
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
 			foreach ($data as $key => $value)
 			{
 				$ss=explode('|', $value[$idjenis]);
@@ -426,6 +435,7 @@ class Laporan extends A {
 
 				//ksort($datas);
 				//foreach ($datas[$key] as $kk => $vv)
+				$t_by=0;
 				for($o=0;$o<$max;$o++)
 				{
 					if(isset($datas[$key][$o]))
@@ -444,11 +454,19 @@ class Laporan extends A {
 						$tgl='-';
 					}
 
-
+					$t_by+=$jlh;
 					echo '<td style="text-align:right;font-size:11px;">'.$tgl.'<br><b>'.rupiah($jlh).'</b></td>';
 				}
-				$alltotal+=$ss[2];
-				echo '<td style="text-align:right;font-size:11px;">'.rupiah($ss[2]).'</td>';
+				$lebih=$t_by-$ss[1];
+				if($lebih>0)
+				$t_lbh='<span style="color:green;">Kelebihan : '.rupiah($lebih).'</span>';
+				else
+				{
+
+					$alltotal+=$ss[2];
+					$t_lbh=rupiah($ss[2]);
+				}
+				echo '<td style="text-align:right;font-size:11px;">'.$t_lbh.'</td>';
 				echo '</tr>';
 				$no++;
 				// echo '<pre>';
@@ -498,7 +516,7 @@ class Laporan extends A {
 	{
 		list($jns,$ket)=explode('-', $jenis);
 		$data['jenis']=$jns;
-
+		$user=$this->config->item('user_id');
 		// $data['tr']=$tr=$this->lm->getTransaksiJurnal($date)->result();
 
 		if($jns=='harian')
@@ -545,6 +563,8 @@ class Laporan extends A {
 									<th>Transaksi</th>
 									<th>Nama Siswa / Kelas</th>
 									<th>Jumlah</th>
+									<th>Catatan</th>
+									<th>Penerima</th>
 									<th style="width:150px;">Status</th>
 									<th style="width:150px;">Action</th>
 								</tr>
@@ -567,12 +587,17 @@ class Laporan extends A {
 											$jlh='&nbsp;<br>';
 											for($j=0;$j<$c;$j++)
 											{
-												// if($v[$j]->keterangan!=7 || $v[$j]->idjenis!=10)
-												// {
+												if($v[$j]->idjenis==4)
+												{
 													if($v[$j]->keterangan!=0)
 														$bb=' -- Bulan : '.getBulan($v[$j]->keterangan).' '.$v[$j]->thn.'';
 													else
-														$bb=' '.$v[$j]->thn.'';
+													{
+														//$bb=' '.$v[$j]->thn.'';
+
+														//if()
+														$bb='&nbsp;'.$v[$j]->namakelasaktif;
+													}
 
 													echo '<div style="padding-left:20px;">
 														<i class="icon icon-trash icon-color" style="cursor:pointer;display:none;" id="hapussatu" onclick="hapussatu(\''.$v[$j]->idjenis.'\',\''.$v[$j]->idp.'\',\''.$v[$j]->idkelasaktif.'\',\''.str_replace(' ', '%20', $v[$j]->nis).'\',\''.strtok($v[$j]->tgl_transaksi, ' ').'\')"></i>
@@ -584,16 +609,59 @@ class Laporan extends A {
 
 													$jlhhh+=$v[$j]->jumlah_2;
 												}
-											// }
+												else
+												{
+													if(($v[$j]->keterangan!=7 || $v[$j]->idjenis!=10))
+													{
+													// if($v[$j]->idjenis!=3)
+													// {
+
+														if($v[$j]->keterangan!=0)
+															$bb=' -- Bulan : '.getBulan($v[$j]->keterangan).' '.$v[$j]->thn.'';
+														else
+														{
+															//$bb=' '.$v[$j]->thn.'';
+
+															//if()
+															$bb='&nbsp;'.$v[$j]->namakelasaktif;
+														}
+														
+														echo '<div style="padding-left:20px;">
+														<i class="icon icon-trash icon-color" style="cursor:pointer;display:none;" id="hapussatu" onclick="hapussatu(\''.$v[$j]->idjenis.'\',\''.$v[$j]->idp.'\',\''.$v[$j]->idkelasaktif.'\',\''.str_replace(' ', '%20', $v[$j]->nis).'\',\''.strtok($v[$j]->tgl_transaksi, ' ').'\')"></i>
+														<i class="icon icon-edit icon-color" style="cursor:pointer;display:none;" id="editsatu" onclick="editsatu(\''.$v[$j]->idjenis.'\',\''.$v[$j]->idp.'\',\''.$v[$j]->idkelasaktif.'\',\''.str_replace(' ', '%20', $v[$j]->nis).'\',\''.strtok($v[$j]->tgl_transaksi, ' ').'\')"></i>
+															'.$v[$j]->jenis.$bb.'
+															
+															</div>';
+															$jlh.='<div style="text-align:right;">'.number_format($v[$j]->jumlah_2).'</div>';
+
+															$jlhhh+=$v[$j]->jumlah_2;
+													}
+												}
+											}
 											echo '</td>';
 											echo '<td style="text-align:left">'.$v[0]->nama.'<br>Kelas '.$v[0]->t_kelas_id.'</td>';
 											echo '<td style="text-align:right">'.$jlh.'</td>';
+											echo '<td style="text-align:left">'.(strpos($v[0]->catatan,'idclub') !== false ? '-' : $v[0]->catatan).'</td>';
 
 											if($v[0]->status_pembayaran==='sudah')
 												$st='<span class="label label-success"><i class="icon-ok icon-white"></i> Sudah Diverifikasi</span>';
 											else
 												$st='<span class="label label-important"><i class="icon-remove icon-white"></i> Belum Diverifikasi</span>';
 
+											
+											if($v[0]->penerima!='')
+											{
+												$penerima=$v[0]->penerima;
+											}
+											else
+											{
+												if(isset($user[$v[0]->id_user]))
+													$penerima=$user[$v[0]->id_user]->nama;
+												else
+													$penerima='';
+											}
+											echo '<td style="text-align:center">'.$penerima.'</td>';
+											
 											echo '<td style="text-align:center">'.$st.'</td>';
 											echo '<td style="text-align:center">
 												<button type="button" class="btn btn-danger" onclick="hapus(\''.$v[0]->tgl_transaksi.'\',\''.$v[0]->idjenis.'\',\''.$v[0]->idkelasaktif.'\',\''.addslashes($v[0]->nama).'\')">
@@ -625,6 +693,8 @@ class Laporan extends A {
 								<tr>
 									<th style="width:30px;text-align:right" colspan="4">Total Penerimaan Harian</th>
 									<th style="text-align:right"><?=rupiah($jlhhh)?></th>
+									<th style="width:150px;"></th>
+									<th style=""></th>
 									<th style="width:150px;"></th>
 									<th style="width:150px;"></th>
 								</tr>

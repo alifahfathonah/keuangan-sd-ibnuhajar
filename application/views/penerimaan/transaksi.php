@@ -74,6 +74,14 @@
 									<input type="text" name="penyetor" id="penyetor" style="width:100%">
 								</div>
 							</div>
+							<div class="row-fluid" style="text-align:left !important;">
+								<div class="span4">&nbsp;</div>
+								<div class="span2" style="width:100px;">Penerima</div>
+								<div class="span1" style="width:10px;">:</div>
+								<div class="span4" >
+									<input type="text" name="penerima" id="penerima" style="width:100%" value="<?=$this->session->userdata('nama')?>">
+								</div>
+							</div>
 							<div id="trans">
 							<?
 							$bayar=$ket='';
@@ -489,8 +497,9 @@ $(document).ready(function(){
 		// var datakelas=$('#datakelas').val();
 		var catatan=$('#catatan').val();
 		var siswa=$('#siswa').val();
+		var penerima=$('#penerima').val();
 		var catatanrapel=$('#catatanrapel').val();
-		var s='idsiswa='+siswa+'&idkelas='+datakelas+'&penyetor='+penyetor+'&total='+tot+'&catatan='+catatan+'&catatanrapel='+catatanrapel;
+		var s='idsiswa='+siswa+'&idkelas='+datakelas+'&penyetor='+penyetor+'&total='+tot+'&catatan='+catatan+'&catatanrapel='+catatanrapel+'&penerima='+penerima;
 		if(tot=='0')
 		{
 			$('#myModal').modal('show');

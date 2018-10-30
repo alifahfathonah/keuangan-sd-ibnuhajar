@@ -2,13 +2,13 @@
 	<div class="span12">
 		<fieldset>
 			<legend style="text-align:left;">Form <?=(isset($idedit) ? 'Edit' : 'Tambah')?> Tabungan</legend>		
-			<div class="control-group" style="margin-top:0px;margin-bottom:3px;"">
+			<div class="control-group" style="margin-top:0px;margin-bottom:3px;">
 			  <label class="control-label" for="typeahead">Tanggal</label>
 			  <div class="controls">
 				<input readonly type="text" name="tgl_transaksi" class="span4" id="tgl_transaksi" style="float:left;" value="<?=date('Y-m-d')?>">
 			  </div>
 			</div>
-			<div class="control-group" style="margin-top:0px;margin-bottom:3px;"">
+			<div class="control-group" style="margin-top:0px;margin-bottom:3px;">
 			  <label class="control-label" for="typeahead">Jenis Tabungan</label>
 			  <div class="controls">
 				<select name="jenistabungan" id="jenistabungan" data-rel="chosen">

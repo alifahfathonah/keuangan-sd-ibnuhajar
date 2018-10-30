@@ -23,7 +23,13 @@
 						<div style="width:100%;text-align:left;" id="isi">
 							<form class="form-horizontal" action="<?=site_url()?>penerimaan/penerimaanRutin/<?=$jenisP->row('id')?>" method="post">
 								  <fieldset style="width:99%;float:left">
-									
+									<?php
+									$csrf = array(
+											'name' => $this->security->get_csrf_token_name(),
+											'hash' => $this->security->get_csrf_hash()
+									);
+									?>
+									<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 									<div class="control-group" style="width:33%;float:left">
 									  <label class="control-label" for="typeahead">Jenis Penerimaan </label>
 									  <div class="controls">
@@ -373,6 +379,20 @@ function hapusdata(id,jns)
 		});
 	}
 
+}
+function hapusdatajemputan(id)
+{
+	$.ajax({
+			url : '<?=site_url()?>penerimaan/hapusdatajemputan/'+id,
+			success : function(a)
+			{
+				var bulan=$('#bulan').val();
+				var tahun=$('#tahun').val();
+				var jenis=$('#jenispenerimaan').val();
+				var driver=$('#driver').val();
+				$('#datasiswa').load('<?=site_url()?>siswa/getSiswaByDriver/'+driver+'/'+bulan+'/'+jenis+'/'+tahun);
+			}
+	});
 }
 function pilihsemua(idselector)
 {	

@@ -45,7 +45,7 @@ $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'db_sd_ibnuhajar';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = TRUE;
@@ -61,7 +61,7 @@ $db['second']['hostname'] = 'localhost';
 $db['second']['username'] = 'root';
 $db['second']['password'] = '';
 $db['second']['database'] = 'db_sm_ibnuhajar';
-$db['second']['dbdriver'] = 'mysql';
+$db['second']['dbdriver'] = 'mysqli';
 $db['second']['dbprefix'] = '';
 $db['second']['pconnect'] = FALSE;
 $db['second']['db_debug'] = TRUE;
@@ -72,6 +72,22 @@ $db['second']['dbcollat'] = 'utf8_general_ci';
 $db['second']['swap_pre'] = '';
 $db['second']['autoinit'] = TRUE;
 $db['second']['stricton'] = FALSE;
+
+$db['third']['hostname'] = 'localhost';
+$db['third']['username'] = 'root';
+$db['third']['password'] = '';
+$db['third']['database'] = 'db_sd_ibhar';
+$db['third']['dbdriver'] = 'mysqli';
+$db['third']['dbprefix'] = '';
+$db['third']['pconnect'] = FALSE;
+$db['third']['db_debug'] = TRUE;
+$db['third']['cache_on'] = FALSE;
+$db['third']['cachedir'] = '';
+$db['third']['char_set'] = 'utf8';
+$db['third']['dbcollat'] = 'utf8_general_ci';
+$db['third']['swap_pre'] = '';
+$db['third']['autoinit'] = TRUE;
+$db['third']['stricton'] = FALSE;
 
 
 /* End of file database.php */

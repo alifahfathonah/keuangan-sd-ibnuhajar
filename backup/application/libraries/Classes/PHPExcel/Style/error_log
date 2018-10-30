@@ -1,0 +1,9 @@
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Interface 'PHPExcel_IComparable' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Conditional.php on line 37
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Border.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Protection.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Font.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Alignment.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Fill.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/NumberFormat.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Borders.php on line 36
+[31-Mar-2015 15:34:32 UTC] PHP Fatal error:  Class 'PHPExcel_Style_Supervisor' not found in /home/k6191362/public_html/keuangan/application/libraries/Classes/PHPExcel/Style/Color.php on line 36

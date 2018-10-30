@@ -530,11 +530,12 @@ class Siswa extends A {
 					// $idkk=$this->km->getKelasAktifByNIS($sis[$ix]->nis,'t')->result();
 					$idkk=$this->db->query('select * from v_kelas_aktif where nis="'.$sis[$ix]->nis.'" and st_aktif="t" and status_siswa_aktif="t" and tahunajaran="'.$ta.'"')->result();
 
-						# code...
-						if(count($idkk)!=0)
-						{
-							// $cek=$this->pm->cekPenerimaanRutinJemputan($bl,$idjenis,$sis[$ix]->nis,$th)->result();
-							$cek=$this->pm->cekPenerimaanRutin($bl,$idjenis,$sis[$ix]->nis,$idkk[0]->id,$th)->result();
+					# code...
+					if(count($idkk)!=0)
+					{
+							// echo $ta.'-'.$bl.'-'.$idjenis.'-'.$sis[$ix]->nama.'-'.$idkk[0]->id.'-'.$th.'<br>';
+							$cek=$this->pm->cekPenerimaanRutinJemputan($bl,$idjenis,$sis[$ix]->nis,$th)->result();
+							// $cek=$this->pm->cekPenerimaanRutin($bl,$idjenis,$sis[$ix]->nis,$idkk[0]->id,$th)->result();
 							// echo $bl.'-'.$idjenis.'-'.$sis[$ix]->nis.'-'.$th.'-'.$idkk[0]->id.'<br>';
 							// echo count($cek).'-<br>';
 							// echo '<pre>';
@@ -554,18 +555,20 @@ class Siswa extends A {
 					$cc='';
 					if(count($cek)!=0)
 					{
-						$cc='<span style="color:green">Daftar</span> <span class="label label-important" style="cursor:pointer" onclick="hapusdata(\''.$sis[$ix]->nis.'__'.$idkk[0]->id.'__'.$idkk[0]->idkelas.'__'.$idkk[0]->id_ajaran.'__'.$idkk[0]->namakelasaktif.'\',\'jemputan\')"><i class="icon icon-white icon-trash"></i></span>';
+						$cc='<span style="color:green">Daftar</span> <span class="label label-important" style="cursor:pointer" onclick="hapusdatajemputan(\''.$cek[0]->id.'\')"><i class="icon icon-white icon-trash"></i></span>';
 
 						if($cek[0]->sisa_bayar==0)
 						{
 							$cekbayar=$this->db->query('select * from t_pembayaran where t_siswa_has_t_kelas_id="'.$idkk[0]->id.'" and t_jenis_pembayaran_id="'.$idjenis.'" and keterangan="'.$bl.'" and bulan_tahun_tagihan="'.$th.'"');
-							$cc='<div style="float:left;width:100%"><span style="color:green">Sudah Bayar</span> <span class="label label-important" style="cursor:pointer" onclick="hapusdata(\''.$sis[$ix]->nis.'__'.$idkk[0]->id.'__'.$idkk[0]->idkelas.'__'.$idkk[0]->id_ajaran.'__'.$idkk[0]->namakelasaktif.'\',\'jemputan\')"><i class="icon icon-white icon-trash"></i></span></div>';
+							// $cc='';
+							$cc='<div style="float:left;width:100%"><span style="color:green">Sudah Bayar</span> <span class="label label-important" style="cursor:pointer" onclick="hapusdatajemputan(\''.$cek[0]->id.'\')"><i class="icon icon-white icon-trash"></i></span></div>';
 							if($cekbayar->num_rows!=0)
 							{
 								// $cc.= '<br>';
 								$cc.= '<div style="color:green;width:100%;float:left;font-size:9px;"><small>Tgl : '.tgl_indo2($cekbayar->row('tgl_transaksi')).'</small></div>';
 							}
 						}
+	
 
 						if($cek[0]->keterangan=='Pulang-Pergi')
 						{

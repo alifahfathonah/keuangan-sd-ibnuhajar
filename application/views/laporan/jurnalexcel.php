@@ -11,6 +11,7 @@ header("Expires: 0");
 						<th scope="col" style="text-align:center;vertical-align:top">Keterangan</th>
 						<th scope="col" style="text-align:center;vertical-align:top">Nama Siswa (Kelas)</th>
 						<th scope="col" style="text-align:right;vertical-align:top">Jumlah</th>
+						<th scope="col" style="text-align:center;vertical-align:top">Catatan</th>
 
 					</tr>
 					<?
@@ -47,6 +48,7 @@ header("Expires: 0");
 											echo '</td>';
 											echo '<td style="text-align:left;vertical-align:top">'.$v[0]->nama.' : Kelas '.$v[0]->t_kelas_id.'</td>';
 											echo '<td style="text-align:right;vertical-align:top">'.$jlh.'</td>';
+											echo '<td style="text-align:left;vertical-align:top">'.(strpos($v[0]->catatan,'idclub') !== false ? '-' : $v[0]->catatan).'</td>';
 											echo '</tr>';
 											$no++;
 										// }
@@ -57,5 +59,6 @@ header("Expires: 0");
 								<tr>
 									<th style="text-align:right;vertical-align:top" colspan="4">Total Penerimaan Harian</th>
 									<th style="text-align:right;vertical-align:top"><?=($jlhhh)?></th>
+									<th style="text-align:right;vertical-align:top"></th>
 								</tr>
 				</table>

@@ -60,21 +60,10 @@ class Penerimaan extends A {
 		list($ta1,$ta2)=explode('-', $tahunajaran);
 		$data['penerimaan']=$pn=$this->pm->getJenisPembayaranByParent(1);
 		$pen=array();
+		// echo $nis.'-'.$idkelasaktif;
 		foreach($pn->result() as $p)
 		{
-			//echo $p->id.'<br>';
-
-			/*if($p->id==3 || $p->id==4)
-			{
-				$nn=$this->pm->dataRecordPenerimaan($p->id,$nis,$idkelasaktif);
-				//echo $p->id.':'.$nis.':'.$idkelasaktif;
-			}
-			else if($p->id!=3 && $p->id!=4)
-			{
-				$nn=$this->pm->dataPenerimaanRutin($p->id,$nis,$idkelasaktif);
-				//echo $p->id;
-			}
-			else*/
+		
 			$nn=$this->pm->getViewDataKewajiban($nis,$idkelasaktif,$p->id);
 			if($nn->num_rows!=0)
 			{
@@ -88,30 +77,9 @@ class Penerimaan extends A {
 			$pen['lain'][]=$p;
 
 		}
+		
 
-			// echo '<pre>';
-			// print_r($n);
-			// echo '</pre>';
-		//echo '<pre>';
-		//print_r($pen);
-		// echo '<div class="row-fluid" style="text-align:left !important;">
-		// 						<div class="span4">&nbsp;</div>
-		// 						<div class="span2" style="width:100px;">Kelas</div>
-		// 						<div class="span1" style="width:10px;">:</div>
-		// 						<div class="span4" id="">
-		// 							<select data-rel="chosen" name="kelas" id="datakelas" data-placeholder="Pilih Data Kelas">
-		// 								<option value="'.$ka->row('idk').'" selected>'.$ka->row('namakelas').'-'.$ka->row('namakelasaktif').'</option>
-		// 							</select>
-		// 						</div>
-		// 					</div>
-		// 					<div class="row-fluid" style="text-align:left !important;">
-		// 						<div class="span4">&nbsp;</div>
-		// 						<div class="span2" style="width:100px;">Penyetor</div>
-		// 						<div class="span1" style="width:10px;">:</div>
-		// 						<div class="span4" >
-		// 							<input type="text" name="penyetor" id="penyetor" style="width:100%" value="'.$sis->row('nama_ayah').';'.$sis->row('nama_ibu').'">
-		// 						</div>
-		// 					</div>';
+			
 		echo '<input type="hidden" id="datakelasbaru" name="kelas" value="'.$ka->row('idk').'">';
 		echo '<table class="table table-striped table-bordered bootstrap-datatable" style="width:70%;;margin:0 auto;">
 				<thead>
@@ -163,14 +131,24 @@ class Penerimaan extends A {
 										{
 											$st_pptab=1;
 										}
-
+										// echo $st_utab;
 										if($n[$ut->id]->bulan!=7)
 										{
-
+												// echo '<pre>';
+												// print_r($n[$ut->id]);
+												// echo '</pre>';
 												if($n[$ut->id]->sisa < 0)
 													$jj=($n[$ut->id]->sudah_bayar+$n[$ut->id]->sisa);
 												else
 													$jj=$n[$ut->id]->sisa;
+
+												if(($n[$ut->id]->wajib_bayar -  $n[$ut->id]->sudah_bayar) == 0)
+												{
+													if($n[$ut->id]->sisa>0)
+													{
+														$jj=0-$n[$ut->id]->sisa;
+													}
+												}
 
 												$cekdiskon=$this->db->query('select * from t_diskon where id_kelas_aktif="'.$idkelasaktif.'" and nis="'.$nis.'" and id_jenis_pembayaran="'.$ut->id.'"');
 												if($cekdiskon->num_rows!=0)
@@ -263,6 +241,7 @@ class Penerimaan extends A {
 										else if($n[$ut->id]->bulan==7)
 										{
 											//.'-'.$st_utab.'-'.$st_pptab
+											// echo $ta1.'-';
 											if($ta1>=2017)
 											{
 												if($st_pptab==1)
@@ -276,18 +255,25 @@ class Penerimaan extends A {
 													echo '<input type="hidden" name="bulanspp['.$ut->id.']" value="'.$n[$ut->id]->bulan.'">';
 													echo '<input type="hidden" name="tahunspp['.$ut->id.']" value="'.$n[$ut->id]->tahun.'">';
 													echo '<input type="hidden" id="ket_'.$ut->jenis.'" value="'.$vvvv.'">';
+													
 												}
 												else if($n[$ut->id]->sisa > 0)
 												{
-													echo getBulan($n[$ut->id]->bulan).' '.$n[$ut->id]->tahun;
-													$vvvv=getBulan($n[$ut->id]->bulan).' '.$n[$ut->id]->tahun;
-													if($n[$ut->id]->sisa < 0)
-														$jj=($n[$ut->id]->sudah_bayar+$n[$ut->id]->sisa);
-													else
-														$jj=$n[$ut->id]->sisa;
-													echo '<input type="hidden" name="bulanspp['.$ut->id.']" value="'.$n[$ut->id]->bulan.'">';
-													echo '<input type="hidden" name="tahunspp['.$ut->id.']" value="'.$n[$ut->id]->tahun.'">';
-													echo '<input type="hidden" id="ket_'.$ut->jenis.'" value="'.$vvvv.'">';
+													// if($st_utab==1)
+													// {
+														// echo $ut->id.'-'.getBulan($n[$ut->id]->bulan).' '.$n[$ut->id]->tahun;
+														echo getBulan($n[$ut->id]->bulan).' '.$n[$ut->id]->tahun;
+														$vvvv=getBulan($n[$ut->id]->bulan).' '.$n[$ut->id]->tahun;
+														if($n[$ut->id]->sisa < 0)
+															$jj=($n[$ut->id]->sudah_bayar+$n[$ut->id]->sisa);
+														else
+															$jj=$n[$ut->id]->sisa;
+														echo '<input type="hidden" name="bulanspp['.$ut->id.']" value="'.$n[$ut->id]->bulan.'">';
+														echo '<input type="hidden" name="tahunspp['.$ut->id.']" value="'.$n[$ut->id]->tahun.'">';
+														echo '<input type="hidden" id="ket_'.$ut->jenis.'" value="'.$vvvv.'">';
+													// }
+													// else
+													// 	echo $st_utab;
 												}
 											}
 										}
@@ -317,11 +303,11 @@ class Penerimaan extends A {
 										echo '<input type="hidden" name="tahunspp['.$ut->id.']" value="0">';
 										echo '<input type="hidden" id="ket_'.$ut->jenis.'" value="">';
 									}
-									$total+=$jj;
+									$total+=($jj < 0 ? 0 :$jj);
 
 						if($ut->id!=18)
 						{
-							$jlh_kewajiban=number_format($jj);
+							$jlh_kewajiban=number_format(($jj < 0 ? 0 :$jj));
 							$inputtext='<input type="text" name="transaksi[\'lain\']['.$ut->id.']" style="width:100%;margin:0px;padding:1px 3px;text-align:right;border:0px;border-bottom:1px dotted #888;font-size:11px;" placeholder="Rp." class="transaksi_'.$ut->jenis.'" id="transaksi_lain" onkeyup="hitung(\'lain\')" value="0" autocomplete="off">';
 						}
 
@@ -499,6 +485,7 @@ class Penerimaan extends A {
 					$rapel['t_jenis_pembayaran_id'] = $k;
 					$rapel['sudah_bayar']=$r_wajib_bayar;
 					$rapel['sisa_bayar']=0;
+					// $rapel['penerima']=0;
 					// $r_keterangan=' ';
 					foreach ($_POST['bayarrapel'][$k] as $kv => $vv)
 					{
@@ -538,6 +525,7 @@ class Penerimaan extends A {
 							'id_parent_jenis_pembayaran'=>$k,
 							'keterangan'=>$r_bulan,
 							'catatan'=>$_POST['catatan'],
+							'penerima'=>$_POST['penerima'],
 							'bulan_tahun_tagihan'=>$bulan_tahun_tagihan
 						);
 						$this->db->insert('t_pembayaran',$r_ins);
@@ -732,6 +720,7 @@ class Penerimaan extends A {
 														'id_parent_jenis_pembayaran'=>10,
 														'keterangan'=>7,
 														'catatan'=>$catatan,
+														'penerima'=>$_POST['penerima'],
 														'bulan_tahun_tagihan'=>$bulan_tahun_tagihan[$idt]
 													);
 													$this->db->insert('t_pembayaran',$ins);
@@ -774,6 +763,7 @@ class Penerimaan extends A {
 															'id_parent_jenis_pembayaran'=>10,
 															'keterangan'=>7,
 															'catatan'=>$catatan,
+															'penerima'=>$c_POST['penerima'],
 															'bulan_tahun_tagihan'=>$bulan_tahun_tagihan[$idt]
 														);
 														$this->db->insert('t_pembayaran',$ins);
@@ -808,6 +798,9 @@ class Penerimaan extends A {
 
 	function penerimaanRutin($idjenis)
 	{
+		// echo '<pre>';
+		// print_r($_POST);
+		// echo '</pre>';
 		$x=0;
 		if(!empty($_POST))
 		{
@@ -925,7 +918,11 @@ class Penerimaan extends A {
 			//
 		}
 	}
-
+	function hapusdatajemputan($id)
+	{
+		$this->db->where('id',$id);
+		$this->db->delete('t_penerimaan_rutin');
+	}
 	function getDataKewajiban($nis,$idkelas,$idjenis,$bulan)
 	{
 		$nis=str_replace('%20', ' ', $nis);

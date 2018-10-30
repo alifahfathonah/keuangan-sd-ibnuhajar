@@ -70,7 +70,6 @@
 						Silahkan Masukan Username dan Password Anda
 					</div>
 					<form class="form-horizontal" action="<?=site_url()?>login/log_in" method="post">
-						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 						<fieldset>
 							<div class="input-prepend" title="Username" data-rel="tooltip">
 								<span class="add-on"><i class="icon-user"></i></span><input autofocus class="input-large span10" name="username" id="username" type="text" />
